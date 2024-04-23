@@ -22,7 +22,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CustomTransitionsScreen()
+                    CustomTransitionsScreen(
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
             }
         }
@@ -30,11 +32,10 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     CustomTransitionsJetpackComposeTheme {
-       CustomTransitionsScreen()
+        CustomTransitionsScreen()
     }
 }
