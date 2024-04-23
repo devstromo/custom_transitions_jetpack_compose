@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -19,6 +20,11 @@ import androidx.compose.ui.unit.sp
 fun CustomTransitionsScreen(
     modifier: Modifier = Modifier
 ) {
+    val colorStops = arrayOf(
+        0.0f to Color(0xFFF88379),
+        1f to Color(0xFFEE4B2B)
+    )
+
     BoxWithConstraints(
         modifier = modifier
     ) {
@@ -34,7 +40,7 @@ fun CustomTransitionsScreen(
                 .height(300.dp)
                 .align(Alignment.Center)
                 .background(
-                    color = Color.Red,
+                    brush = Brush.verticalGradient(colorStops = colorStops),
                     shape = ShapeDefaults.Large
                 )
         ) {
