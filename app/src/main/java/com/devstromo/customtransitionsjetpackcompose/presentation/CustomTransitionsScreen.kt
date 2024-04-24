@@ -56,40 +56,12 @@ fun CustomTransitionsScreen(
         )
         RoundRectangle(
             modifier = Modifier
-                .align(Alignment.Center)
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color(0xFF000000), Color(0xFF343434))
-                    ),
-                    shape = RoundedCornerShape(20.dp)
-                )
+                .align(Alignment.Center),
+            colors = listOf(
+                Color(0xFF343434),
+                Color(0xFF000000),
+            )
         )
-//        Box(
-//            modifier = Modifier
-//                .width(150.dp)
-//                .height(250.dp)
-//                .align(Alignment.Center)
-//                .drawWithCache {
-//                    val width = size.width
-//
-//                    val offset = width * progressAnimated
-//                    val gradientWidth = width
-//
-//                    val brush = Brush.verticalGradient(
-//                        colors = gradientColors,
-//                        startY = 0f,
-//                        endY = offset + gradientWidth
-//
-//                    )
-//                    onDrawBehind {
-//                        drawRoundRect(
-//                            topLeft = Offset(0f,0f),
-//                            cornerRadius = CornerRadius(x = 50f, y = 50f),
-//                            brush = brush
-//                        )
-//                    }
-//                }
-//        )
     }
 
 
@@ -97,12 +69,19 @@ fun CustomTransitionsScreen(
 
 @Composable
 fun RoundRectangle(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    colors: List<Color> = emptyList()
 ) {
     Box(
         modifier = modifier
-            .width(150.dp)
-            .height(250.dp)
+            .width(200.dp)
+            .height(300.dp)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = colors
+                ),
+                shape = RoundedCornerShape(20.dp)
+            )
     )
 }
 
