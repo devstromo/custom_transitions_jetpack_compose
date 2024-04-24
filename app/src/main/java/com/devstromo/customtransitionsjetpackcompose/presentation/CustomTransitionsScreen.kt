@@ -6,18 +6,17 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -55,33 +54,55 @@ fun CustomTransitionsScreen(
             fontWeight = FontWeight.Bold,
             fontSize = 25.sp,
         )
-        Box(
+        RoundRectangle(
             modifier = Modifier
-                .width(150.dp)
-                .height(250.dp)
                 .align(Alignment.Center)
-                .drawWithCache {
-                    val width = size.width
-
-                    val offset = width * progressAnimated
-                    val gradientWidth = width
-
-                    val brush = Brush.verticalGradient(
-                        colors = gradientColors,
-                        startY = 0f,
-                        endY = offset + gradientWidth
-
-                    )
-                    onDrawBehind {
-                        drawRoundRect(
-                            topLeft = Offset(0f,0f),
-                            cornerRadius = CornerRadius(x = 50f, y = 50f),
-                            brush = brush
-                        )
-                    }
-                }
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(Color(0xFF000000), Color(0xFF343434))
+                    ),
+                    shape = RoundedCornerShape(20.dp)
+                )
         )
+//        Box(
+//            modifier = Modifier
+//                .width(150.dp)
+//                .height(250.dp)
+//                .align(Alignment.Center)
+//                .drawWithCache {
+//                    val width = size.width
+//
+//                    val offset = width * progressAnimated
+//                    val gradientWidth = width
+//
+//                    val brush = Brush.verticalGradient(
+//                        colors = gradientColors,
+//                        startY = 0f,
+//                        endY = offset + gradientWidth
+//
+//                    )
+//                    onDrawBehind {
+//                        drawRoundRect(
+//                            topLeft = Offset(0f,0f),
+//                            cornerRadius = CornerRadius(x = 50f, y = 50f),
+//                            brush = brush
+//                        )
+//                    }
+//                }
+//        )
     }
 
 
 }
+
+@Composable
+fun RoundRectangle(
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .width(150.dp)
+            .height(250.dp)
+    )
+}
+
