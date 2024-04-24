@@ -1,10 +1,7 @@
 package com.devstromo.customtransitionsjetpackcompose.presentation
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +34,12 @@ fun CustomTransitionsScreen(
         mutableStateOf(false)
     }
 
+    val rotateAnimation by animateFloatAsState(
+        targetValue = if (rotated) 180f else 0f,
+        animationSpec = tween(1500, 0, easing = EaseIn),
+        label = "rotation"
+    )
+
     BoxWithConstraints(
         modifier = modifier
     ) {
@@ -48,7 +52,11 @@ fun CustomTransitionsScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.Center)
-                .clickable { rotated = !rotated },
+                .clickable { rotated = !rotated }
+                .graphicsLayer {
+                    rotationY = rotateAnimation
+                    cameraDistance = 6 *  density
+                },
             content = {
                 if (rotated) {
                     RoundRectangle(
