@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.height
@@ -15,6 +16,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,23 +31,10 @@ import androidx.compose.ui.unit.sp
 fun CustomTransitionsScreen(
     modifier: Modifier = Modifier
 ) {
-    val gradientColors = listOf(
-        Color(0xFFF88379),
-        Color(0xFFEE4B2B),
-        Color(0xFF000000)
-    )
 
-    val limit = 1.5f
-
-    val transition = rememberInfiniteTransition(label = "shimmer")
-    val progressAnimated by transition.animateFloat(
-        initialValue = -limit,
-        targetValue = limit,
-        animationSpec = infiniteRepeatable(
-            animation = tween(3500, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
-        ), label = "shimmer"
-    )
+    var rotated by remember {
+        mutableStateOf(false)
+    }
 
     BoxWithConstraints(
         modifier = modifier
@@ -54,16 +45,31 @@ fun CustomTransitionsScreen(
             fontWeight = FontWeight.Bold,
             fontSize = 25.sp,
         )
-        RoundRectangle(
+        Box(
             modifier = Modifier
-                .align(Alignment.Center),
-            colors = listOf(
-                Color(0xFF343434),
-                Color(0xFF000000),
-            )
-        )
-    }
+                .align(Alignment.Center)
+                .clickable { rotated = !rotated },
+            content = {
+                if (rotated) {
+                    RoundRectangle(
+                        colors = listOf(
+                            Color(0xFF343434),
+                            Color(0xFF000000),
+                        )
+                    )
+                } else {
+                    RoundRectangle(
+                        colors = listOf(
+                            Color(0xFFF76767),
+                            Color(0xFFEE4B2B),
+                        )
+                    )
 
+                }
+            }
+        )
+
+    }
 
 }
 
