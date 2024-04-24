@@ -1,6 +1,6 @@
 package com.devstromo.customtransitionsjetpackcompose.presentation
 
-import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -36,7 +36,10 @@ fun CustomTransitionsScreen(
 
     val rotateAnimation by animateFloatAsState(
         targetValue = if (rotated) 180f else 0f,
-        animationSpec = tween(1500, 0, easing = EaseIn),
+        animationSpec = tween(
+            2500,
+            easing = FastOutSlowInEasing
+        ),
         label = "rotation"
     )
 
@@ -52,14 +55,14 @@ fun CustomTransitionsScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.Center)
-                .clickable { rotated = !rotated }
-                .graphicsLayer {
-                    rotationY = rotateAnimation
-                    cameraDistance = 6 *  density
-                },
+                .clickable { rotated = !rotated },
             content = {
                 if (rotated) {
                     RoundRectangle(
+                        modifier = Modifier.graphicsLayer {
+                            rotationY = rotateAnimation
+                            cameraDistance = 6 * density
+                        },
                         colors = listOf(
                             Color(0xFF343434),
                             Color(0xFF000000),
@@ -67,6 +70,10 @@ fun CustomTransitionsScreen(
                     )
                 } else {
                     RoundRectangle(
+                        modifier = Modifier.graphicsLayer {
+                            rotationY = rotateAnimation
+                            cameraDistance = 6 * density
+                        },
                         colors = listOf(
                             Color(0xFFF76767),
                             Color(0xFFEE4B2B),
