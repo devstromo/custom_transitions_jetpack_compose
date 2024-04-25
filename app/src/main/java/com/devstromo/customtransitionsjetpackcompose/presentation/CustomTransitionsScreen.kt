@@ -57,7 +57,7 @@ fun CustomTransitionsScreen(
                 .align(Alignment.Center)
                 .clickable { rotated = !rotated },
             content = {
-                if (rotated) {
+                if (rotated && rotateAnimation > 90f) {
                     RoundRectangle(
                         modifier = Modifier.graphicsLayer {
                             rotationY = rotateAnimation
