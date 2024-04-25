@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.height
@@ -55,7 +56,11 @@ fun CustomTransitionsScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.Center)
-                .clickable { rotated = !rotated },
+                .clickable(
+                    onClick = { rotated = !rotated },
+                    indication = null, // remove ripple effect
+                    interactionSource = remember { MutableInteractionSource() }
+                ),
             content = {
                 if (rotateAnimation >= 90f) {
                     RoundRectangle(
