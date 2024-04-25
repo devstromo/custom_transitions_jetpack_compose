@@ -6,6 +6,8 @@ Welcome to the Custom Transitions Jetpack Compose repository! This project is de
 
 Animations greatly enhance the user experience, making UI interactions smooth and engaging. In this repository, we focus on custom transitions based in this [X post](https://x.com/androiddevnotes/status/1781708316609048845) 
 
+![Example Project](example.gif)
+
 ## 🛠️ Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Follow these simple steps to start using and contributing to Custom Transitions Jetpack Compose.
